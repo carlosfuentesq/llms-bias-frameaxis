@@ -16,20 +16,39 @@ class CoreUtil:
     
     @staticmethod
     def map_axis_to_vec(emb, axis):
-        return (emb.wv[axis[1]] - emb.wv[axis[0]])
+        return (emb[axis[1]] - emb[axis[0]])
 
     @staticmethod
     def load_axes_file(filename):
         axes = []
-        with open(filename) as fi:
+        with open(filename, 'r', encoding='utf-8') as fi:
             for line in fi:
                 w1, w2 = [term.strip() for term in line.split("\t")]
                 axes.append((w1,w2))                
         return axes 
 
     @staticmethod
+    def load_axes_file_csv(filename, delimiter=',', has_header=False):
+        import csv
+        axes = []
+        with open(filename, 'r', encoding='utf-8') as file:
+            csv_reader = csv.reader(file, delimiter=delimiter)
+            
+            # Saltar el encabezado si existe
+            if has_header:
+                next(csv_reader)
+                
+            for row in csv_reader:
+                if len(row) >= 2:  # Asegurar que hay al menos dos columnas
+                    w1, w2 = row[0].strip(), row[1].strip()
+                    axes.append((w1, w2))
+        
+        return axes
+
+    @staticmethod
     def load_conceptnet_antonyms_axes(version = "1.0"):
         if version == "1.0":
+            # returns an array of tuples (word1, word2)
             return CoreUtil.load_axes_file(pkg_resources.resource_filename(
                 'semaxis', "axes/{}".format('732_semaxis_axes.tsv')))            
         else:
@@ -44,6 +63,11 @@ class CoreUtil:
     def load_wordnet_antonyms_axes():
         return CoreUtil.load_axes_file(pkg_resources.resource_filename(
                 'semaxis', "axes/{}".format('wordnet_antonyms.tsv')))
+    
+    @staticmethod
+    def load_spanish_antonyms_axes():
+        return CoreUtil.load_axes_file(pkg_resources.resource_filename(
+                'semaxis', "axes/{}".format('wordnet_spanish_antonyms.tsv')))
 
     @staticmethod
     def bootstrap_sampling(document, size):

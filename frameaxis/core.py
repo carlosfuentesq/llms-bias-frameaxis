@@ -4,6 +4,8 @@ import pkg_resources
 import numpy as np
 from scipy import stats
 from collections import defaultdict
+import re
+import string
 
 class CoreUtil:
     @staticmethod
@@ -132,3 +134,35 @@ class CoreUtil:
                 axis_rank_table.append([pole0, pole1, percent_rank, value, np.mean(sample_values)])
 
         return axis_rank_table
+
+    @staticmethod
+    def preprocess(document):
+        def remove_punctuation(text):
+            punctuation = string.punctuation + "¿¡"
+
+            # Crear una tabla de traducción que reemplace los signos de puntuación por un espacio
+            translator = str.maketrans({char: ' ' for char in punctuation})
+
+            return text.translate(translator)
+
+        def remove_numbers(text):
+            numbers_re = re.compile(r'\d+')
+            return numbers_re.sub(' ', text)
+
+        def remove_urls(text):
+            urls_re = re.compile(r'((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z]){2,6}([a-zA-Z0-9\.\&\/\?\:@\-_=#])*')
+            return urls_re.sub(' ', text)
+
+        def remove_spaces_newlines_tabs(text):
+            # Cleans text by removing whitespace, newlines and tabs
+            return " ".join(text.strip().split())
+
+
+        # remover urls, puntuacion, numeros, mayusculas y espacios/tabs/saltos de linea
+        document = remove_urls(document)
+        document = remove_punctuation(document)
+        document = remove_numbers(document)
+        document = document.lower()
+        document = remove_spaces_newlines_tabs(document)
+
+        return document

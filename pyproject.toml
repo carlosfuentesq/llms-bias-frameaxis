@@ -13,6 +13,7 @@ nltk = "3.6.5"
 scikit-learn = "1.0.1"
 adjusttext = "0.7.3"
 spacy = "3.0.7"
+seaborn = "0.11.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

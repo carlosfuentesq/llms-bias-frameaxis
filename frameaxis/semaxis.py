@@ -108,12 +108,7 @@ class SemAxis:
         frequencies = np.ravel(transformed_data.sum(axis=0))
 
         # recorre las palabras del documento
-        not_found = []
         for w_index, w in enumerate(vectorizer.get_feature_names()):
-            #if w not in self.embedding:
-            #    print(f"palabra: {w}", f"texto: {document}")
-            #    return [], [], []
-
             if w in self.embedding:
                 # si la palabra está en el embedding y su frecuencia es menor que la min_freq
                 # o es un stopword o está en to_filter, la ignora
@@ -124,10 +119,6 @@ class SemAxis:
                 terms_filtered.append(self.embedding[w])
                 frequencies_filtered.append(frequencies[w_index])
                 words.append(w)
-            else:
-                not_found.append(w)
-
-        not_found_ratio = len(not_found)/len(vectorizer.get_feature_names())
 
         if self.axes_mat is None:
             # si no se ha creado la matriz de ejes, la crea

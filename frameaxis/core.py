@@ -65,11 +65,6 @@ class CoreUtil:
     def load_wordnet_antonyms_axes():
         return CoreUtil.load_axes_file(pkg_resources.resource_filename(
                 'semaxis', "axes/{}".format('wordnet_antonyms.tsv')))
-    
-    @staticmethod
-    def load_spanish_antonyms_axes():
-        return CoreUtil.load_axes_file(pkg_resources.resource_filename(
-                'semaxis', "axes/{}".format('wordnet_spanish_antonyms.tsv')))
 
     @staticmethod
     def bootstrap_sampling(document, size):

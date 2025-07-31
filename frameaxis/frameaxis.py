@@ -8,7 +8,7 @@ from core import CoreUtil
 import logging
 
 
-class SemAxis:
+class FrameAxis:
     def __init__(self, embedding, axes_str=CoreUtil.load_conceptnet_antonyms_axes()):
         logging.basicConfig(level=logging.DEBUG,
                             format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',

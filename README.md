@@ -1,25 +1,7 @@
-# frameaxis
+# Medición de sesgos de LLMs en español utilizando FrameAxis
 
-a repository for "FrameAxis: characterizing microframe bias and intensity with word embedding" 
-https://peerj.com/articles/cs-644/
+Extensión del repositorio utilizado para el artículo "FrameAxis: characterizing microframe bias and intensity with word embedding", creado para llevar a cabo mi Trabajo de Título. 
 
-<img src="https://github.com/haewoon/frameaxis/raw/main/semeval14.png">
-
-**Run**
-
-```
-poetry shell
-poetry install
-```
-
-
-**Download embedding**
-
-The example code works with [GloVe](https://nlp.stanford.edu/projects/glove/) word embeddings.<br/>
-Download glove.840B.300d.zip and decompress it to /data/embeddings/
-
-
-**Run sample code**
-
-Move to examples/
-Run notebooks from 1_ to 4_.
+- En la carpeta [frameaxis](frameaxis/) se encuentra el núcleo del framework, sobre el cual se realizaron algunas adaptaciones para llevar a cabo el presente trabajo. 
+- En la carpeta [examples](examples/) se encuentran algunos ejemplos presentados en el artículo original de FrameAxis. 
+- En la carpeta [chilean-news](chilean-news/) se encuentra todo el código implementado para llevar a cabo este trabajo.
